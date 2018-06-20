@@ -42,7 +42,7 @@
             <div class="navbar-brand">
                 <a href="/" class="navbar-caption" title="anywhere3d.com">anywhere3d</a>
             </div>
-            <a class="navbar-logo pull-left"><img src="/icons/anywhere3d-girls-logo50x50.png" alt="anywhere3d logo"></a>
+            <a class="navbar-logo pull-left"><img src="https://i.imgur.com/09bC4Q0.png" alt="anywhere3d logo"></a>
             <ul class="nav navbar-nav navbar-right pull-left">
                 <li class="first"><div></div></li>
             </ul>
@@ -216,12 +216,13 @@
 
     <!-- UTILITIES -->
     
-<script src="/js/ZipLoader.js"></script>
-<script src="/js/colorpicker.js"></script>
-<script src="/js/messg.min.js"></script>
+<!-- script src="/js/ZipLoader.js"></script -->
+<!-- script src="/js/colorpicker.js"></script -->
+<!-- script src="/js/messg.min.js"></script -->
+<!-- script src="/js/cookies.js"></script -->
+
 <script src="/js/spectrum.js"></script>
 <script src="/js/img2matrix.js"></script>
-<script src="/js/cookies.js"></script>
 <script src="/js/spinner.js"></script>
 
     <!-- THREEJS -->
@@ -237,7 +238,6 @@
 <script src="/three/BVHImport.js"></script>
 <script src="/js/scene-helpers.js"></script>
 <script src="/js/EdgesHelper.js"></script>
-
 <script src="/js/side-panels.js"></script>
 <script src="/js/helpers.js"></script>
 
@@ -422,8 +422,6 @@
         if (!!meshBBbox && focusLock.checked) controls.focus( meshBBbox, false );
     }
 
-//  =======================================================================================  //
-
 //  Deallocate renderer to avoid memory leaks. // VERY IMPORTANT //
     function deallocateRendererContext( renderer ){
 
@@ -437,8 +435,6 @@
         renderer.domElement = null;
         renderer            = null;
     }
-
-//  =======================================================================================  //
 
     function deallocateMeshTextures( mesh ){
 
@@ -463,8 +459,6 @@
             delete deallocate[name];
         }
     }
-
-//  =======================================================================================  //
 
 </script>
 
@@ -544,7 +538,7 @@
         debugMode && console.log( "paste:" );
     });
 
-//  test icon: "https://s20.postimg.org/t0m3by98t/dress3_test_icon.png".
+//  test icon: "https://s20.postimg.cc/t0m3by98t/dress3_test_icon.png".
 
     $(iconTxtfieldSelector).on("change", function(e){
     //  e.preventDefault();
@@ -597,7 +591,7 @@
         debugMode && console.log( "paste:" );
     });
 
-//  test preview: "https://s20.postimg.org/cbkng7s4t/dress3_test_preview.png".
+//  test preview: "https://s20.postimg.cc/cbkng7s4t/dress3_test_preview.png".
 
     $(previewTxtfieldSelector).on("change", function(e){
     //  e.preventDefault();
@@ -939,9 +933,6 @@
 
 </script>
 
-//  animate();
-
-</script>
 
 </body>
 </html>

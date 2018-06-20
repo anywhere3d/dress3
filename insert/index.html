@@ -188,16 +188,7 @@
                 </div>
 
                 <div class="clearfix"></div>
-            <!-- 
-                <div class="form-group">
-                    <input type="hidden" id="uuid-tf" name="uuid">
-                    <input type="hidden" id="user-tf" name="owner">
-                    <input type="hidden" id="kind-tf" name="kind" value="texture">
-                    <input type="hidden" id="asset-codename-tf" name="asset_codename" value="dress3">
-                    <input type="hidden" id="asset-titlename-tf" name="asset_titlename" value="Dress-D3">
-                    <input type="hidden" id="asset-filename-tf" name="asset_filename" value="HF_DressLayer_FemaleBodyKitv05_v03.js">
-                </div>
-             -->
+
             </form>
         </div>
 
@@ -286,7 +277,7 @@
 //  dress3_scene.js
 
     var rendererSelector = "#render-container";
-    var fontPath = "/three/r78/js/fonts/helvetiker_regular.typeface.json";
+    var fontPath = "/three/fonts/helvetiker_regular.typeface.json";
 
     if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
@@ -349,7 +340,7 @@
     var focusLock = $(controlsFocusSelector)[0];
 
     var mesh, meshBBbox;
-    var _filepath = "/avatar-editor/v/0.2.5/assets/HF_DressLayer_FemaleBodyKitv05_v03.js";
+    var _filepath = "/skinned/HF_Dress_FBK05_v03.js";
 
     w3.getHttpObject( _filepath, function(json){
         mesh = loadSkinnedAsset( json );
@@ -947,243 +938,6 @@
     });
 
 </script>
-
-
-<style>
-/*
-    .img-height-auto { height:auto; }
-    .spinner-loading { position:absolute; width:100%; height:100%; top:0px; }
-    .spinner-loading img { position:relative;top:50%; left:50%; margin:auto;
-      -webkit-transform: translateX(-50%) translateY(-50%);
-      -ms-transform: translateX(-50%) translateY(-50%);
-      transform: translateX(-50%) translateY(-50%);
-    }
-*/
-</style>
-
-<script>
-/*
-//  spinner.js
-    var spinnerSelector = "#spinner";
-    var spinnerLoadingSelector = ".spinner-loading";
-    var spinner_html = '<div id="spinner" class="spinner-loading"><img src="/icons/load.gif"></div>';
-    var spinner = $(spinner_html)[0];
-*/
-</script>
-
-<script>
-/*
-    function submitForm( selector ){
-        var form = $(selector)[0];
-        var action = $(form).attr("action");
-
-    //  Serialize the form data.
-        var formData = $(form).serialize();
-
-    //  Submit the form using AJAX.
-        $.ajax({
-
-            type: "POST",
-            url: action,  //  $(form).attr("action"),
-            data: formData,
-            dataType: json,
-            jsonp: false,
-            username: "anonymous",
-            password: "anonymous",
-
-        }).done(function( responseText ){
-            
-            flagsReset();
-            form.reset();
-            deallocateMeshTextures( mesh );
-            debugMode && console.log("response:", responseText);
-
-        }).fail(function( data ){
-            
-            debugMode && console.log("data:", data.responseText);
-
-        }).always(function() {
-
-            reset( form );
-            $(spinner).remove();
-
-        });
-    }
-
-    function newEntry(callback){
-
-    //  Entry.
-        var name = $("#name-tf").val();
-        var asset = $("#asset").val();
-        var gender = $("#gender-list").val();
-        var category = $("#category-list").val();
-        var type = $("#type-list").val();
-        var icon = $("#icon-tf").val();
-        var preview = $("#preview-tf").val();
-        var texture = $("#texture-tf").val();
-        var permissions = $("#permissions-list").val();
-        var uuid = $("#uuid-tf").val();
-        var owner = $("#user-tf").val();
-        var kind = $("#kind-tf").val();
-        var assetCodename = $("#asset-codename-tf").val();
-        var assetTitlename = $("#asset-titlename-tf").val();
-        var assetFilename = $("#asset-filename-tf").val();
-
-        var formData = new FormData();
-
-        var entry = { 
-            "name": name,
-            "asset": asset,
-            "gender": gender,
-            "category": category,
-            "icon": icon,
-            "preview": preview,
-            "texture": texture,
-            "permissions": permissions,
-            "uuid": uuid,
-            "owner": owner,
-            "kind": kind,
-            "asset_codename": assetCodename,
-            "asset_titlename": assetTitlename,
-            "asset_filename": assetFilename
-        };
-
-        debugMode && console.log( "entry:", entry );
-        var data = JSON.stringify(entry);
-        formData.append( "data", data );
-        debugMode && console.log( "data:", data );
-
-    //  Http Request.
-        var url = "";
-        var method = "POST";
-        var async = true;
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var json = JSON.parse(this.responseText);
-                debugMode && console.log( "response:", json );
-                deallocateMeshTextures( mesh );
-                $(dress3FormSelector)[0].reset();
-                callback(json);
-           }
-        };
-        xhr.open(method, url, async);
-        xhr.send( {data: data} );
-        
-    }
-*/
-
-/*
-
-//  Type.
-
-    $(typeDropListSelector).on("change", function(e){
-    //  e.preventDefault();
-        var _img = $(textureImgSelector)[0];
-
-        if (this.value == "bumpMap") mesh.material.bumpScale = 0.01;
-
-        _txrflag = false;
-        _img.removeAttribute("src");
-        $(textureTxtfieldSelector).val("");
-        w3.removeClass(_img, imgHeightAutoClassname);
-        if (_img.classList.length == 0) _img.removeAttribute("class");
-        deallocateMeshTextures( mesh );        
-
-        debugMode && console.log( "Texture URL:", _img.src );
-        debugMode && console.log( "texture-flag:", _txrflag );
-
-    });
-
-
-    function deallocate(texture){
-        if (!texture) return;
-
-        var deallocate = {};
-        deallocate.texture = texture;
-        texture = null;
-
-        var src_file = deallocate.texture.sourceFile;
-        debugMode && console.log( "deallocate sourceFile:", src_file );
-
-        if (!!mesh && !!mesh.material){
-
-            if (!!mesh.material.map && mesh.material.map.sourceFile == src_file)
-             {
-                deallocate.map = mesh.material.map;
-                mesh.material.map = null; 
-            }
-            if (!!mesh.material.bumpMap && mesh.material.bumpMap.sourceFile == src_file) {
-                deallocate.bumpMap = mesh.material.bumpMap; 
-                mesh.material.bumpMap = null; 
-            }
-//            if (!!mesh.material.normalMap && mesh.material.normalMap.sourceFile == src_file) { 
-//                deallocate.normalMap = mesh.material.normalMap; 
-//                mesh.material.normalMap = null; 
-//            }
-            mesh.material.needsUpdate = true;
-
-        }
-
-        debugMode && console.log( "deallocate:", Object.keys(deallocate) );
-        for (var name in deallocate){
-            deallocate[name].dispose();
-            delete deallocate[name];
-        }
-        debugMode && console.log("deallocate:", deallocate);
-    }
-*/
-/*
-    //  material.
-        var material;
-        if (!!mesh && !!mesh.material) material = mesh.material;
-        if (!material) return;
-
-    //  Map.
-        if (this.value == "map"){
-            if (!!material.map && !material.bumpMap){
-                deallocate(material.map);
-            }
-            if (!!material.map && !!material.bumpMap){
-                if (material.map.uuid != material.bumpMap.uuid){
-                    deallocate(material.map);
-                } else {
-                    material.map = null;
-                }
-            }
-        //  if (!material.map && !!material.bumpMap){}
-        //  if (!material.map && !material.bumpMap){}
-        }
-
-    //  BumpMap.
-        if (this.value == "bumpMap"){
-            material.bumpScale = 0.05;
-            if (!!material.map && !material.bumpMap){
-                material.bumpMap = material.map;
-            }
-            if (!!material.map && !!material.bumpMap){
-                if ( material.map.uuid != material.bumpMap.uuid ){
-                    deallocate(material.bumpMap);
-                    material.bumpMap = material.map;
-                } else {
-                    material.bumpMap = null;
-                }
-            }
-            if (!material.map && !!material.bumpMap){
-                deallocate(material.bumpMap);
-            }
-        //  if (!material.map && !material.bumpMap){}
-        }
-
-    //  NormalMap.
-        if (this.value == "normalMap"){
-            if (!!material.normalMap) deallocate(material.normalMap);
-        }
-*/
-
-</script>
-
-<script>
 
 //  animate();
 
